@@ -20,6 +20,12 @@ public_users.post("/register", (req,res) => {
 
   return res.status(201).json({ message: "User registered successfully" });
 });
+
+// Get the book list available in the shop
+public_users.get('/',function (req, res) {
+  //Write your code here
+  res.send(JSON.stringify({ books }, null, 4));
+});
 const getallBooks = new Promise((resolve, reject) => {
     if (Object.keys(books).length > 0) {
       resolve(books);
@@ -27,13 +33,7 @@ const getallBooks = new Promise((resolve, reject) => {
       reject(new Error("No books in db"));
     }
   });
-
-// Get the book list available in the shop
 public_users.get('/2',function (req, res) {
-  //Write your code here
-  res.send(JSON.stringify({ books }, null, 4));
-});
-public_users.get('/async',function (req, res) {
     //Write your code here
     getallBooks.then(function(books) {
         return res.send(JSON.stringify({ books }, null, 4));
